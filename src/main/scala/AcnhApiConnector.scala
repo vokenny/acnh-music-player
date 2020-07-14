@@ -1,4 +1,3 @@
-import com.typesafe.scalalogging.LazyLogging
 import models.Song
 import play.api.libs.json.{JsValue, Json}
 import scalaj.http.HttpResponse
@@ -6,20 +5,19 @@ import scalaj.http.HttpResponse
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
-class AcnhApiConnector extends RequestBuilder with LazyLogging {
+class AcnhApiConnector extends RequestBuilder {
 
   def getKkSong(id: Int): HttpResponse[String] = {
     logger.debug(s"Making GET request for song Id $id")
     GET(s"http://www.acnhapi.com/v1/songs/$id")
   }
 
-  // TODO: What to do with failed requests after 3 attempts?
   def songListSeqFut: Seq[Future[HttpResponse[String]]] = {
     // There are 95 K.K. Slider songs in Animal Crossing: New Horizons
-    for (i <- 1 to 5) yield {
+    for (i <- 1 to 95) yield {
       Future {
         val resp = getKkSong(i)
-        logger.debug(s"GET request for song Id $i received ${resp.statusLine}")
+        logger.debug(s"GET request for Song ID $i received ${resp.statusLine}")
         retryRequest(resp, 3)(getKkSong(i))
       }
     }

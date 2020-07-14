@@ -1,6 +1,7 @@
+import com.typesafe.scalalogging.LazyLogging
 import scalaj.http.{Http, HttpOptions, HttpResponse}
 
-trait RequestBuilder {
+trait RequestBuilder extends LazyLogging {
 
   // TODO: Add exponential backoff
   def retryRequest(resp: HttpResponse[String], count: Int)(f: => HttpResponse[String]): HttpResponse[String] = {
