@@ -1,7 +1,6 @@
-import org.scalatestplus.mockito.MockitoSugar
 import testsupport.BaseSpec
 
-class AcnhApiConnectorSpec extends BaseSpec with MockitoSugar {
+class AcnhApiConnectorSpec extends BaseSpec {
 
   // TODO: Mock the ACNH API
 }
