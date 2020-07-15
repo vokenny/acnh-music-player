@@ -14,9 +14,7 @@ class AcnhApiConnector extends RequestBuilder {
 
   // TODO: What should happen if it can't get all 95 songs?
   //  retryRequest already retries up to three times for a single song, but what if it still fails?
-  //  If app continues to run, it won't retry since it's assigned to a lazy val
-  //  If it's changed so app will retry, that would be another 95 requests to retry all
-  //  Separate method to only retry failed requests, then return new list with all songs?
+  //  If app continues to run, it will fail in transformToSong
   def songListSeqFut: Seq[Future[HttpResponse[String]]] = {
     // There are 95 K.K. Slider songs in Animal Crossing: New Horizons
     for (i <- 1 to 95) yield {
