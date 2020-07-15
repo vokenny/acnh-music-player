@@ -61,6 +61,10 @@ object AcnhMusicPlayer extends App with LazyLogging {
     appState = ApplicationState.Playing
     logger.debug(s"ApplicationState: $appState")
 
+    // TODO: Add continuous play by checking player state
+    //  instead of waiting for User to select another song
+    // TODO: Add option for shuffle play too
+
     Thread.sleep(2000) // Wait for player logs to print first
     continueCheck("Select another song to play or Quit ACNH Music Player? 'Select' or 'Quit'")
 
