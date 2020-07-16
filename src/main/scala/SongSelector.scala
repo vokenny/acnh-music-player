@@ -6,24 +6,29 @@ import scala.io.StdIn.readLine
 class SongSelector extends LazyLogging {
 
   def getUserSongChoice(songList: List[Song]): Int = {
-    songList.foreach(s => println(s"ID: ${s.id} -> Song Name: ${s.name}"))
+    def showSongs(): Unit = songList.take(10).foreach(s => println(s"ID: ${s.id} -> Song Name: ${s.name}"))
+
+    showSongs()
     println("Choose a song to play by ID:")
-    val chosenSongId: Option[Int] = try {
-      Some(readLine().toInt)
-    } catch {
-      case e: Exception => None
+    val chosenSongId: Either[String, Int] = {
+      val userInput: String = readLine()
+      if (userInput.nonEmpty) {
+        if (userInput.forall(_.isDigit)) Right(userInput.toInt) else Left(userInput)
+      } else Left(userInput)
     }
 
     chosenSongId match {
-      case Some(id) => id
-      case None =>
-        logger.warn("User did not submit an integer for Song ID selection")
-        println("Please submit a Song ID number")
+      case Right(id) => id
+      case Left(value) if value.equalsIgnoreCase("next") =>
+        val (firstTen, rest) = songList.splitAt(10)
+        getUserSongChoice(rest ::: firstTen)
+      case _ =>
+        logger.info(s"User did not submit an integer or 'Next' for Song ID selection. They submitted: '$chosenSongId'")
+        println("Please submit a Song ID number or 'Next' to see more songs")
         getUserSongChoice(songList)
     }
   }
 
-  // TODO: Build in "pagination" for song list
   def select(songList: List[Song]): Song = {
     val chosenSongId: Int = getUserSongChoice(songList)
     val filteredSongList: List[Song] = songList.filter(s => s.id == chosenSongId)
