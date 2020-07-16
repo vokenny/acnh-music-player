@@ -9,7 +9,7 @@ class SongSelector extends LazyLogging {
     def showSongs(): Unit = songList.take(10).foreach(s => println(s"ID: ${s.id} -> Song Name: ${s.name}"))
 
     showSongs()
-    println("Choose a song to play by ID:")
+    println("Choose a song to play by ID or 'Next' to see more songs:")
     val chosenSongId: Either[String, Int] = {
       val userInput: String = readLine()
       if (userInput.nonEmpty) {
