@@ -22,8 +22,8 @@ class SongSelector extends LazyLogging {
       case Left(value) if value.equalsIgnoreCase("next") =>
         val (firstTen, rest) = songList.splitAt(10)
         getUserSongChoice(rest ::: firstTen)
-      case _ =>
-        logger.info(s"User did not submit an integer or 'Next' for Song ID selection. They submitted: '$chosenSongId'")
+      case Left(value) =>
+        logger.info(s"User did not submit an integer or 'Next' for Song ID selection. They submitted: '$value'")
         println("Please submit a Song ID number or 'Next' to see more songs")
         getUserSongChoice(songList)
     }
