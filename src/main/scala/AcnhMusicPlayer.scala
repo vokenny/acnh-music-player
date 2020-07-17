@@ -40,7 +40,11 @@ object AcnhMusicPlayer extends App with LazyLogging {
     }
   }
 
-  println("Welcome to ACNH Music Player!")
+  println(
+    s""""
+       ||Welcome to ACNH Music Player!
+       |This application can play the 95 K.K. Slider Songs
+       |from Animal Crossing: New Horizons""".stripMargin)
 
   do {
     logger.debug(s"ApplicationState: $appState")
@@ -49,7 +53,7 @@ object AcnhMusicPlayer extends App with LazyLogging {
     val chosenSong = songSelector.select(songList)
 
     if (!Filepath.existsInResources(chosenSong.filename)) {
-      logger.info(s"Song not found in resources directory. Downloading ${chosenSong.name}")
+      logger.info(s"${chosenSong.filename} not found in resources directory. Downloading ${chosenSong.name}")
       fileDownloader.download(chosenSong.uri, chosenSong.filename)
     }
 
@@ -66,6 +70,7 @@ object AcnhMusicPlayer extends App with LazyLogging {
     // TODO: Add option for shuffle play too
 
     Thread.sleep(2000) // Wait for player logs to print first
+    println(s"Playing ${chosenSong.name}")
     continueCheck("Select another song to play or Quit ACNH Music Player? 'Select' or 'Quit'")
 
     player.stop()

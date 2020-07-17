@@ -36,8 +36,7 @@ class SongSelector extends LazyLogging {
     filteredSongList match {
       case s :: Nil => s
       case _ =>
-        logger.warn(s"Cannot find song ID: $chosenSongId")
-        logger.warn(s"Found $filteredSongList in filteredSongList")
+        logger.warn(s"Cannot find song ID: $chosenSongId. Found $filteredSongList in filteredSongList")
         println(s"Cannot find song ID: $chosenSongId")
         select(songList)
     }
