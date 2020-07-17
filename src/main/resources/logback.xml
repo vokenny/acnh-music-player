@@ -4,7 +4,7 @@
         <!-- encoders are assigned the type
              ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>%green(%date{ISO8691}) %black(level=[%highlight(%5level)]) %black(message=[%blue(%msg)]) %black(logger=[%logger] thread=[%thread]) %n</pattern>
+            <pattern>%green(%date{ISO8691}) %black(level=[%highlight(%level)]) %black(message=[%blue(%msg)]) %black(logger=[%logger] thread=[%thread]) %n</pattern>
         </encoder>
     </appender>
 

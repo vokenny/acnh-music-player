@@ -15,7 +15,7 @@ object Filepath {
   def existsInResources(sourcePath: String): Boolean = {
     val mp3List: List[File] = getListOfFiles(new File("src/main/resources"), List("mp3"))
 
-    if (mp3List.contains(Filepath(sourcePath))) true else false
+    mp3List.contains(Filepath(sourcePath))
   }
 
 }

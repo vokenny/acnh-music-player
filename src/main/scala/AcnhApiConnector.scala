@@ -33,7 +33,7 @@ class AcnhApiConnector extends RequestBuilder {
         id <- (json \ "id").validate[Int]
         name <- (json \ "name" \ "name-EUen").validate[String]
         musicUri <- (json \ "music_uri").validate[String]
-      } yield new Song(id, name, musicUri)).get
+      } yield Song(id, name, musicUri)).get
     }
   }
 

@@ -8,7 +8,7 @@ class SongSelectorSpec extends BaseSpec {
   val songSelector = new SongSelector
 
   val songList: List[Song] = (for (i <- 1 to 20) yield {
-    new Song(i, s"songName$i", s"http://localhost:0000/v1/music/$i")
+    Song(i, s"songName$i", s"http://localhost:0000/v1/music/$i")
   }).toList
 
   "getUserSongChoice" should "print out the first ten songs" in {
@@ -25,7 +25,7 @@ class SongSelectorSpec extends BaseSpec {
          |ID: 8 -> Song Name: songName8
          |ID: 9 -> Song Name: songName9
          |ID: 10 -> Song Name: songName10
-         |Choose a song to play by ID:
+         |Choose a song to play by ID or 'Next' to see more songs:
          |""".stripMargin
 
     Console.withOut(out) {

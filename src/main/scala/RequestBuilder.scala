@@ -8,8 +8,8 @@ trait RequestBuilder extends LazyLogging {
     if (count == 0) resp
     else {
       if (resp.isServerError) {
-        val r = f
-        retryRequest(r, count - 1)(f)
+        val newResp = f
+        retryRequest(newResp, count - 1)(f)
       } else resp
     }
   }

@@ -1,12 +1,8 @@
 package models
 
-class Song(idNumber: Int, songName: String, musicUri: String) {
+case class Song(id: Int, name: String, uri: String) {
 
-  val id: Int = this.idNumber
-  val name: String = this.songName
-  val uri: String = this.musicUri
-
-  def filename: String =
+  val filename: String =
     // Normalized song names
     name.toLowerCase.filter(_.isLetterOrDigit) + ".mp3"
 
