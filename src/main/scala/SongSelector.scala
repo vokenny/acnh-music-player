@@ -6,9 +6,9 @@ import scala.io.StdIn.readLine
 class SongSelector extends LazyLogging {
 
   def getUserSongChoice(songList: List[Song]): Int = {
-    def showSongs(): Unit = songList.take(10).foreach(s => println(s"ID: ${s.id} -> Song Name: ${s.name}"))
+    def showTenSongs(): Unit = songList.take(10).foreach(s => println(s"ID: ${s.id} -> Song Name: ${s.name}"))
 
-    showSongs()
+    showTenSongs()
     println("Choose a song to play by ID or 'Next' to see more songs:")
     val chosenSongId: Either[String, Int] = {
       val userInput: String = readLine()
