@@ -3,10 +3,15 @@ import testsupport.BaseSpec
 
 class SongSpec extends BaseSpec {
 
-  "filename" should "produce a normalized mp3 filename with only lowercase letters and digits (no spaces)" in {
-    val song = Song(1, " S o Ng - & NaM E 0*1", "http://localhost:0000/v1/music/1")
+  val songList: List[Song] = (for (i <- 1 to 20) yield {
+    Song(i, s" S o Ng - & NaM E 0*$i", s"http://localhost:0000/v1/music/$i")
+  }).toList
 
-    song.filename should be ("songname01.mp3")
+  "filename" should "produce a normalized mp3 filename with only lowercase letters and digits (no spaces)" in {
+    songList.head.filename should be ("songname01.mp3")
   }
 
+  it should "have a unique filename specific to the Song" in {
+    songList.foreach(s => s.filename should be (s"songname0${s.id}.mp3"))
+  }
 }
