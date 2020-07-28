@@ -2,6 +2,7 @@ import com.typesafe.scalalogging.LazyLogging
 import models.Song
 
 import scala.io.StdIn.readLine
+import scala.util.Random
 
 class SongSelector extends LazyLogging {
 
@@ -42,4 +43,16 @@ class SongSelector extends LazyLogging {
     }
   }
 
+  def downloadCheck(song: Song): Unit = {
+    if (!song.isDownloaded) {
+      logger.info(s"${song.filename} not found in resources directory. Downloading ${song.name}")
+      val fileDownloader: FileDownloader = new FileDownloader
+      fileDownloader.download(song.uri, song.filename)
+    }
+  }
+
+  def randomSong(songList: List[Song]): Song = {
+    val songIndex: Int = Random.nextInt(songList.length)
+    songList(songIndex)
+  }
 }
